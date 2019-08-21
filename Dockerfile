@@ -22,5 +22,6 @@ RUN ng build --prod
 RUN cd dist
 
 #Start the server
-RUN http-server
+RUN http-server -p 4200
+
 
