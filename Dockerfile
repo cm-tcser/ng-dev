@@ -25,7 +25,7 @@ EXPOSE 4200
 
 #Build the project
 #RUN ng build --prod
-CMD ['ng',' serve']
+CMD ['npm',' start']
 
 #Change Directory to dist folder
 #RUN cd dist
