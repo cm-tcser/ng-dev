@@ -1,42 +1,33 @@
 FROM node:10.16.3
 
-#Create working directory
+# #Create working directory
 WORKDIR /usr/devops-assesment
 
-#Install git 
+# #Install git 
 RUN apt-get install git
 
-#Clone Project
+# #Clone Project
+RUN git config --global http.sslverify false
 RUN git clone https://github.com/cm-tcser/ng-dev.git .
 
-#List file
+# #List file
 RUN ls -ltr
-#Install dependencies
-RUN npm install
 
-#Install  angular cli
+# # install bower & git
+RUN npm config set strict-ssl false
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /usr/devops-assesment/node_modules/.bin:$PATH
+
+# #Install http -server
+# RUN npm config set strict-ssl false
+
+# install and cache app dependencies
+#COPY package.json /app/package.json
+RUN npm install
 RUN npm install -g @angular/cli
 
-#Install http -server
-RUN npm install -g http-server
-
-#EXPOSE 
-EXPOSE 4200
-
-#Build the project
-#RUN ng build --prod
-CMD ["npm","start"]
-
-#Change Directory to dist folder
-#RUN cd dist
-
-#list files
-#RUN ls -ltr 
-
-#Expose port
-#EXPOSE 4200
-
 #Start the server
-#RUN http-server -p 4200
+CMD ng serve --host 0.0.0.0
 
 
